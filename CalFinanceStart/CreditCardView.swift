@@ -33,18 +33,36 @@ struct CreditCardView: View {
     
     private var headerSection: some View {
         //TODO: Implement headerSection
-        Text("headerSection")
+        VStack(alignment: .leading, spacing: 10
+        ){
+            Text(card.ownerName)
+                .font(.title2)
+            Text(card.cardNumber)
+                .font(.headline)
+        }
+
     }
     
     private var balanceSection: some View {
         //TODO: Implement balanceSection
-        //HINT: Use BalanceAmountView here! 
-        Text("balanceSection")
+        //HINT: Use BalanceAmountView here!
+        VStack(alignment: .leading, spacing: 10
+        ){
+                Text("Balance")
+            Text("$1222")
+                .font(.title2)
+                
+        }
+       
     }
     
     private var visaSection: some View {
         //TODO: Implement visaSection
-        Text("visaSection")
+        HStack{Spacer()
+            Text("VISA")
+                .italic()
+        }
+        
     }
 }
 

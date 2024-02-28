@@ -11,7 +11,7 @@ import SwiftUI
 struct AddNewCardView: View {
     @Environment(\.dismiss) private var dismiss
     
-    var cardManager: CardManager 
+    var cardManager: CardManager
     @State private var ownerName = ""
     @State private var cardNumber = ""
     
@@ -46,12 +46,44 @@ struct AddNewCardView: View {
     
     //TODO: Implement generateCreditCardNumberButton
     private var generateCreditCardNumberButton: some View {
-        Text("generateCreditCardNumberButton")
-    }
+        Button(action: {generateCreditCardNumber()})
+        {
+            
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.green.opacity(0.7))
+                    .stroke(.green, lineWidth: 1)
+                    .frame(height: 50)
+                    .overlay(
+                        HStack{
+                            Text("Generate Credit Card Number")
+                                .tint(.white)
+                            Image(systemName: "creditcard.and.123")
+                                .tint(.white)
+                        }
+                    )
+            }
+        }
+        
     
-    //TODO: Implement addCreditCardButton 
+    
+    //TODO: Implement addCreditCardButton
     private var addCreditCardButton: some View {
-        Text("addCreditCardButton")
+        var card = CFCard(cardNumber: cardNumber, ownerName: ownerName, balance: 0, transactions: [])
+        return Button(action:{cardManager.addCard(for: card)})
+        {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.blue.opacity(0.7))
+                .stroke(.blue, lineWidth: 1)
+                .frame(height: 50)
+                .overlay(
+                    Text("Add Credit Card!")
+                        .tint(.white)
+                    
+                )
+                
+            
+                    
+        }
     }
     
     private func generateCreditCardNumber() {

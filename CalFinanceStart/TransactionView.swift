@@ -11,10 +11,28 @@ import SwiftUI
 /// - Each ``CFTransaction`` has three types: transfer, deposit, and purchase. Depending on the type, `TransactionView` will show the appropriate UI.
 struct TransactionView: View {
     var transaction: CFTransaction
-    
+    let birthday = Date()
     var body: some View {
         //TODO: Implement TransactionView body
-        Text("TransactionView")
+        HStack{
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(.gray, lineWidth: 2)
+                .overlay(
+                    VStack(){
+                        creditCardNumberSection
+                        HStack{
+                            imageSection
+                            transactionNameSection
+                            VStack{
+                                infoSection
+                                /*Text("birthday.formatted(date: .abbreviated, time: .standard")*/
+                            }
+                        }
+                    }
+                )
+            }
+        
+        
     }
     
     //Credit card number at the top
@@ -26,13 +44,25 @@ struct TransactionView: View {
     //Transaction type image
     private var imageSection: some View {
         //TODO: Implement imageSection
-        Text("imageSection")
+        Image(systemName: getTransactionImageName()
+            )
+        .foregroundStyle(getTransactionColor())
+        .padding()
+        .background(getTransactionColor().opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     
     //"Transfer", "Deposit", "Purchase"
     private var transactionNameSection: some View {
         //TODO: Implement transactionNameSection
-        Text("transactionNameSection")
+        switch transaction.type {
+            case .transfer:
+                Text("Transfer")
+            case .deposit:
+                Text("Deposit")
+            case .purchase:
+                Text("Purchase")
+        }
     }
     
     //Right hand side transaction information
@@ -40,7 +70,9 @@ struct TransactionView: View {
     private var infoSection: some View {
         //TODO: Implement infoSection
         Text("infoSection")
+        .foregroundColor(getTransactionColor())
     }
+    
     
     //MARK: - Helper Functions
     //Don't forget to use these functions!! They are indeed quite handy.
@@ -72,6 +104,12 @@ struct TransactionView: View {
         }
     }
 }
+
+/*private func formatted(
+    date: Date.FormatStyle.DateStyle,
+    time: Date.FormatStyle.TimeStyle
+) -> String{}*/
+
 
 struct TransactionViewPreviewProvider: PreviewProvider {
     static var cardManager = CardManager()

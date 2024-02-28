@@ -13,43 +13,46 @@ struct TransactionView: View {
     var transaction: CFTransaction
     let birthday = Date()
     var body: some View {
-        //TODO: Implement TransactionView body
-        HStack{
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(.gray, lineWidth: 2)
-                .overlay(
-                    VStack(){
-                        creditCardNumberSection
-                        HStack{
-                            imageSection
-                            transactionNameSection
-                            VStack{
+            HStack() {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 2)
+                    .overlay(
+                        VStack(alignment: .leading, spacing: 10) {
+                            Spacer()
+                            creditCardNumberSection
+                            Spacer()
+                            HStack (spacing: 20){
+                                imageSection
+                            Spacer()
+                                transactionNameSection
+                                Spacer()
                                 infoSection
-                                /*Text("birthday.formatted(date: .abbreviated, time: .standard")*/
                             }
+                            
                         }
-                    }
-                )
+                    )
+                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+                        )
             }
-        
-        
-    }
+    
+            .frame(height: 200)
+        }
+   
     
     //Credit card number at the top
     private var creditCardNumberSection: some View {
         //TODO: Implement creditCardNumberSection
-        Text("creditCardNumberSection")
+        Text(transaction.associatedCardNumber)
     }
     
     //Transaction type image
     private var imageSection: some View {
         //TODO: Implement imageSection
-        Image(systemName: getTransactionImageName()
-            )
-        .foregroundStyle(getTransactionColor())
+        Image(systemName: getTransactionImageName())
+        .foregroundColor(getTransactionColor())
         .padding()
         .background(getTransactionColor().opacity(0.2))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     
     //"Transfer", "Deposit", "Purchase"
@@ -69,8 +72,16 @@ struct TransactionView: View {
     //HINT: Use BalanceAmountView here!
     private var infoSection: some View {
         //TODO: Implement infoSection
-        Text("infoSection")
-        .foregroundColor(getTransactionColor())
+        VStack {
+            Text("\(transaction.changeAmount)")
+                .foregroundColor(getTransactionColor())
+                .padding(.bottom, 4)
+                .bold()
+            Text(transaction.date.formatted(date: .abbreviated, time: .standard))
+                .font(.caption)
+                .foregroundColor(.gray)
+                }
+                .padding()
     }
     
     

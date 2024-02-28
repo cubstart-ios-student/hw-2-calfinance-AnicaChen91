@@ -113,7 +113,6 @@ import SwiftUI
         let cNum = createCreditCardNumber()
         let card = CFCard(cardNumber: cNum , ownerName: personNames[Int.random(in: 0...personNames.count - 1)], balance: Int.random(in: -10000 ... 10000), transactions: generateTransactions(withMax: 10, for: cNum))
         return card
-        //return CFCard(cardNumber: "", ownerName: "", balance: 0, transactions: [])
     }
     
     /// Add a given or new card to CardManager
@@ -127,28 +126,16 @@ import SwiftUI
     /// - Returns: The total balance across all cards.
     func getTotalBalanceAcrossAllCards() -> Int {
         //TODO: Implement getTotalBalanceAcrossAllCards()
-        /*var total = 0
-        for i in 0...cards.count{
-            total += cards[i].balance;
-        }*/
-        return 0
+        return cards.reduce(0) { $0 + $1.balance }
     }
     
     /// Filters cards into two groups: those with positive and negative balances
     /// - Returns: A ``CFCardBalances`` struct with the appropriate initialized properites (`cardsWithPositiveBalances` & `cardsWithNegativeBalances`)
     func getCardsPositiveAndNegativeBalances() -> CFCardBalances {
-        //TODO: Implement getCardsPositiveAndNegativeBalances()
-        /*var cardsWithPositiveBalances = [CFCardBalances]()
-        var cardsWithNegativeBalances = [CFCardBalances]()
-        for i in 0...cards.count{
-            if cards[i].balance > 0{
-                cardsWithPositiveBalances.append(cards[i])
-            }
-            else{
-                cardsWithNegativeBalances.append(cards[i])
-            }
-        }*/
-        return CFCardBalances(cardsWithPositiveBalances: [], cardsWithNegativeBalances: [])
+        //TODO: Implement getCardsPositiveAndNegativeBalances(
+        let positiveBalances = cards.filter { $0.balance >= 0 }
+        let negativeBalances = cards.filter { $0.balance < 0 }
+        return CFCardBalances(cardsWithPositiveBalances: positiveBalances, cardsWithNegativeBalances: negativeBalances)
     }
     
     //MARK: - <<<<<< END IMPLEMENTATION

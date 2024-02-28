@@ -91,9 +91,9 @@
 			isa = PBXGroup;
 			children = (
 				E81E33712B70B4EF00374716 /* CalFinanceApp.swift */,
-				E81E33702B70B4EE00374716 /* Ext+View.swift */,
 				E81E33732B70B4EF00374716 /* ManageCardsView.swift */,
 				E81E33722B70B4EF00374716 /* MyCardsView.swift */,
+				E81E33702B70B4EE00374716 /* Ext+View.swift */,
 				E81E335A2B70B4CE00374716 /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
